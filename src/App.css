@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+  margin: 100px;
+}
+
+.shopping-list form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: lightcyan;
+  padding: 30px;
+}
+
+h1 {
+  background-color: lightblue;
+  width: 100%;
+  padding: 30px;
+}
+
+.list-item {
+  background-color: lightblue;
+  border-color: #ddd;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  color: #333;
+  display: grid;
+  grid-template-columns: 70% 20% 10%;
+  width: 300px;
+}
+
+.list-item label {
+  text-align: left;
+}
+
+.list-item button {
+  font-size: 14px;
+}
+
+.list-item input {
+  text-align: right;
+}
