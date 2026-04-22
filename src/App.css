@@ -1,44 +1,97 @@
 .App {
   text-align: center;
-  margin: 100px;
+  margin: 50px auto;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
 }
 
-.shopping-list form{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  background-color: lightcyan;
-  padding: 30px;
+/* CONTENEDOR PRINCIPAL */
+.shopping-list {
+  max-width: 400px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
 }
 
+/* TITULO */
 h1 {
-  background-color: lightblue;
-  width: 100%;
-  padding: 30px;
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  color: white;
+  margin: 0;
+  padding: 20px;
+  font-size: 24px;
 }
 
-.list-item {
-  background-color: lightblue;
-  border-color: #ddd;
-  margin: 10px;
+/* FORMULARIOS */
+.shopping-list form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+/* INPUTS */
+.shopping-list input {
   padding: 10px;
-  border-radius: 5px;
-  color: #333;
-  display: grid;
-  grid-template-columns: 70% 20% 10%;
-  width: 300px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  transition: 0.2s;
 }
 
+.shopping-list input:focus {
+  border-color: #ff7a18;
+  box-shadow: 0 0 5px rgba(255,122,24,0.3);
+}
+
+/* BOTONES */
+.shopping-list button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #ff7a18;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+
+
+/* LISTA */
+.list-item {
+  background-color: #e3e3e3;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 60px 40px;
+  align-items: center;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
+}
+
+/* TEXTO */
 .list-item label {
   text-align: left;
+  font-weight: 500;
 }
 
-.list-item button {
-  font-size: 14px;
-}
-
+/* INPUT CANTIDAD */
 .list-item input {
-  text-align: right;
+  text-align: center;
+  background: #fff;
+}
+
+/* BOTON ELIMINAR */
+.list-item button {
+  background: transparent;
+  font-size: 15px;
+}
+
+.list-item button:hover {
+  transform: scale(1.1);
+  background: #f08a42;
 }

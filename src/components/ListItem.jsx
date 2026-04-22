@@ -1,4 +1,5 @@
 import "../App.css";
+import DeleteItem from './DeleteItem';
 
 export default function ListItem({
   label,
@@ -11,7 +12,7 @@ export default function ListItem({
 
       <input name={label} value={quantity} readOnly />
 
-      <button type="button" onClick={onDelete}>❌</button>
+      <DeleteItem onDelete={onDelete} />
     </div>
   );
 }

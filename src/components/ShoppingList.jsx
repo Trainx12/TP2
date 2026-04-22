@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ListItem from './ListItem';
 
+
 export function ShoppingList() {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState('');
@@ -29,14 +30,13 @@ export function ShoppingList() {
     const formData = new FormData(e.target);
     let object = {};
     formData.forEach((value, key) => object[key] = value);
-    alert(`You purchased: ${JSON.stringify(object)}`);
+    alert(`Acabas de comprar: ${JSON.stringify(object)}`);
   }
 
   return (
     <div className='shopping-list'>
-      <h1>Shopping List</h1>
+      <h1>Mis Compras</h1>
 
-      {/* FORM AGREGAR */}
       <form onSubmit={addItem}>
         <input
           type="text"
@@ -55,7 +55,6 @@ export function ShoppingList() {
         <button type="submit">Agregar</button>
       </form>
 
-      {/* LISTA */}
       <form onSubmit={onFormSubmit}>
         {items.map((prod, index) => (
           <ListItem
@@ -66,7 +65,7 @@ export function ShoppingList() {
           />
         ))}
 
-        {items.length > 0 && <button>Checkout</button>}
+        {items.length > 0 && <button>Comprar</button>}
       </form>
     </div>
   );
