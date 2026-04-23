@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ListItem from './ListItem';
-
+import AddItem from './AddItem';
 
 export function ShoppingList() {
   const [items, setItems] = useState([]);
@@ -52,7 +52,7 @@ export function ShoppingList() {
           onChange={(e) => setNewQuantity(Number(e.target.value))}
         />
 
-        <button type="submit">Agregar</button>
+        <AddItem />
       </form>
 
       <form onSubmit={onFormSubmit}>
