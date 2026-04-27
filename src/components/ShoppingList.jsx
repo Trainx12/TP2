@@ -6,17 +6,14 @@ export function ShoppingList() {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState('');
   const [newQuantity, setNewQuantity] = useState(1);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editItem, setEditItem] = useState('');
+  const [editQuantity, setEditQuantity] = useState(1);
 
   function addItem(e) {
     e.preventDefault();
-
     if (newItem.trim() === '') return;
-
-    setItems([
-      ...items,
-      { item: newItem, quantity: newQuantity }
-    ]);
-
+    setItems([...items, { item: newItem, quantity: newQuantity, purchased: false }]);
     setNewItem('');
     setNewQuantity(1);
   }
@@ -25,18 +22,28 @@ export function ShoppingList() {
     setItems(items.filter((_, index) => index !== indexToDelete));
   }
 
-  function onFormSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    let object = {};
-    formData.forEach((value, key) => object[key] = value);
-    alert(`Acabas de comprar: ${JSON.stringify(object)}`);
+  function startEdit(index) {
+    setEditingIndex(index);
+    setEditItem(items[index].item);
+    setEditQuantity(items[index].quantity);
+  }
+
+  function saveEdit(index) {
+    const updated = [...items];
+    updated[index] = { item: editItem, quantity: editQuantity, purchased: items[index].purchased };
+    setItems(updated);
+    setEditingIndex(null);
+  }
+
+  function togglePurchased(index) {
+    const updated = [...items];
+    updated[index] = { ...updated[index], purchased: !updated[index].purchased };
+    setItems(updated);
   }
 
   return (
     <div className='shopping-list'>
       <h1>Mis Compras</h1>
-
       <form onSubmit={addItem}>
         <input
           type="text"
@@ -44,29 +51,46 @@ export function ShoppingList() {
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
         />
-
         <input
           type="number"
           min="1"
           value={newQuantity}
           onChange={(e) => setNewQuantity(Number(e.target.value))}
         />
-
         <AddItem />
       </form>
 
-      <form onSubmit={onFormSubmit}>
+      <div className="items-list">
         {items.map((prod, index) => (
-          <ListItem
-            key={index}
-            label={prod.item}
-            quantity={prod.quantity}
-            onDelete={() => deleteItem(index)}
-          />
+          editingIndex === index ? (
+            <div key={index} className="list-item editing">
+              <input
+                type="text"
+                value={editItem}
+                onChange={(e) => setEditItem(e.target.value)}
+              />
+              <input
+                type="number"
+                min="1"
+                value={editQuantity}
+                onChange={(e) => setEditQuantity(Number(e.target.value))}
+              />
+              <button type="button" onClick={() => saveEdit(index)}>✅</button>
+              <button type="button" onClick={() => setEditingIndex(null)}>❌</button>
+            </div>
+          ) : (
+            <ListItem
+              key={index}
+              label={prod.item}
+              quantity={prod.quantity}
+              purchased={prod.purchased}
+              onDelete={() => deleteItem(index)}
+              onEdit={() => startEdit(index)}
+              onTogglePurchased={() => togglePurchased(index)}
+            />
+          )
         ))}
-
-        {items.length > 0 && <button>Comprar</button>}
-      </form>
+      </div>
     </div>
   );
 }
