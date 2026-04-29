@@ -29,11 +29,13 @@ export function ShoppingList() {
   }
 
   function saveEdit(index) {
-    const updated = [...items];
-    updated[index] = { item: editItem, quantity: editQuantity, purchased: items[index].purchased };
-    setItems(updated);
-    setEditingIndex(null);
-  }
+  if (editItem.trim() === '') return;  
+  if (editQuantity < 1) return;
+  const updated = [...items];
+  updated[index] = { item: editItem, quantity: editQuantity, purchased: items[index].purchased };
+  setItems(updated);
+  setEditingIndex(null);
+}
 
   function togglePurchased(index) {
     const updated = [...items];
@@ -67,13 +69,16 @@ export function ShoppingList() {
               <input
                 type="text"
                 value={editItem}
-                onChange={(e) => setEditItem(e.target.value)}
+                onChange={(e) => setEditItem(e.target.value)}  
               />
               <input
                 type="number"
                 min="1"
                 value={editQuantity}
-                onChange={(e) => setEditQuantity(Number(e.target.value))}
+                onChange={(e) => {
+                  const val = Number(e.target.value);
+                  if (val >= 1) setEditQuantity(val); 
+                }}
               />
               <button type="button" onClick={() => saveEdit(index)}>✅</button>
               <button type="button" onClick={() => setEditingIndex(null)}>❌</button>
