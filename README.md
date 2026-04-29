@@ -7,3 +7,4 @@ To test run:
 ```
 tp2-fr.vercel.app
 ```
+https://vercel.com/trainx12s-projects/tp2-fr/settings/domains
